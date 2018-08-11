@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "525457553507",
+    "firebase_url": "https://notasana-57563.firebaseio.com",
+    "project_id": "notasana-57563",
+    "storage_bucket": "notasana-57563.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525457553507:android:f199da2ccf2abb79",
+        "android_client_info": {
+          "package_name": "com.example.brosh.notasana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525457553507-knoqbbpjv0pjjjeqv79hmvg3mr71lg7c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.brosh.notasana",
+            "certificate_hash": "0de16cd94a7e636d962e9fdcca2ea45d199ac42a"
+          }
+        },
+        {
+          "client_id": "525457553507-qr695vppasi20lhf3hc8jfjdnbohgsp7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS0eDgd-F6wxtnhsbrQPzn4NpEKXb6PJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525457553507-qr695vppasi20lhf3hc8jfjdnbohgsp7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
