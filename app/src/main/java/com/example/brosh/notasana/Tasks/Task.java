@@ -15,6 +15,7 @@ public class Task implements Serializable{
     int id;
     Boolean sendNotification;
     public static ArrayList<Task> allTasks = new ArrayList<>();
+    String test = "nothing";
 
     public Task(){}
 
