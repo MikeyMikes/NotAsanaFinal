@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">NotAsana</string>
     <string name="no_account">Sign up here!</string>
-    <string name="add_friend">Add Friend</string>
+    <string name="add_friend">About Friend</string>
     <string name="add_friend_name">Who would you like to add?</string>
 </resources>

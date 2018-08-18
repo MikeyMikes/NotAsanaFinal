@@ -66,9 +66,7 @@ public class SetupTaskActivity extends AppCompatActivity {
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    sendNotification = true;
-                }
+                sendNotification = isChecked;
             }
         });
 
@@ -76,8 +74,6 @@ public class SetupTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //stuff for firebase
-                Toast.makeText(SetupTaskActivity.this, User.username, Toast.LENGTH_SHORT).show();
-
                 DatabaseReference mRef = FirebaseDatabase.getInstance()
                         .getReferenceFromUrl("https://notasana-57563.firebaseio.com/Users/Info/" + User.username + "/Tasks/");
 
@@ -100,9 +96,6 @@ public class SetupTaskActivity extends AppCompatActivity {
                             //send to database
                             //MainActivity.entryCount++;
                             try {
-                                toast(TaskTab.taskIDs+"");
-                                toast(TaskTab.taskIDs.size()+"");
-                                toast(TaskTab.taskIDs.get(TaskTab.taskIDs.size()-1).toString());
                                 DatabaseReference rootRef = mRef.child(TaskTab.taskIDs.get(TaskTab.taskIDs.size()-1).toString());
 
                                 addChild(rootRef, "Name", name);
@@ -142,16 +135,8 @@ public class SetupTaskActivity extends AppCompatActivity {
 
         // Now create matcher object
         Matcher m = r.matcher(date);
-        boolean acceptableDate = false;
 
-        if (m.find( )) {
-            acceptableDate = true;
-            //System.out.println("Found value: " + m.group(0) );
-        }//else {
-        //System.out.println(deadline + " is not a match");
-        //}
-
-        return acceptableDate;
+        return m.find();
     }
 
     public static void addChild(DatabaseReference rootRef, String key, String value){

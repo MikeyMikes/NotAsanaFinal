@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
-public class Task implements Serializable{
+public class Task implements Serializable {
 
     String owner, task, deadline, dateCreated;
     int id;

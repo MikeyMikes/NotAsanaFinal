@@ -103,8 +103,6 @@ public class TaskTab extends Fragment implements Feature {
                 itemPosition = position;
 
                 setDaysUntilDue();
-
-
             }
 
         });

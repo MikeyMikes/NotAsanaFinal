@@ -32,32 +32,47 @@ public class AddFriendActivity extends AppCompatActivity {
         yourFriendIDTextView = findViewById(R.id.yourFriendIDTextView);
         yourFriendIDTextView.setText("Your friend ID is " + User.userID);
 
-        friendIDEditText = findViewById(R.id.friendIDEditText);
-        friendNameEditText = findViewById(R.id.friendNameEditText);
-
         addFriendButton = findViewById(R.id.findFriendButton);
         addFriendButton.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View v) {
-                //TODO
-                if(friendIDEditText != null && friendNameEditText != null) {
-                    findFriend();
+
+                friendIDEditText = findViewById(R.id.friendIDEditText);
+                final String friendID = friendIDEditText.getText().toString();
+                friendNameEditText = findViewById(R.id.friendNameEditText);
+                final String friendName = friendNameEditText.getText().toString();
+
+                if(friendID != "") {
+                    if(friendName != "") {
+                        findFriend(friendName, friendID);
+                    }
+                    else{
+                        friendNameEditText.setError("This field can't be blank");
+                        friendNameEditText.setText("");
+                        friendNameEditText.requestFocus();
+                    }
+                }
+                else{
+                    friendIDEditText.setError("This field can't be blank");
+                    friendIDEditText.setText("");
+                    friendIDEditText.requestFocus();
                 }
             }
         });
 
     }
 
-    public void findFriend(){
+    public void findFriend(final String friendName, final String friendID){
 
         DatabaseReference mRef;
 
         try {
             mRef = FirebaseDatabase.getInstance().getReferenceFromUrl
                     ("https://notasana-57563.firebaseio.com/Users/Info/" +
-                            friendNameEditText + "/");
+                            friendName + "/");
         }
         catch(Exception e){
-            toast("That user wasn't found");
+            toast("That user wasn't found first");
             return;
         }
 
@@ -65,17 +80,33 @@ public class AddFriendActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                boolean found = false;
+
                 for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                     if (dataSnapshot.exists()) {
-                        String correctID = dsp.child("UserID").getValue().toString();
-                        if(correctID.equals(friendIDEditText.getText().toString())) {
-                            //TODO
-                            toast("Worked");
-                        }
-                        else{
-                            toast("That user wasn't found");
+                        try {
+                            String correctID = "";
+                            if(dsp.getKey().toString().equals("UserID")){
+                                correctID = dsp.getValue().toString();
+                            }
+                            if (correctID.equals(friendID)) {
+                                found = true;
+                            } else {
+                                found = false;
+                            }
+                        }catch(Exception e){
+                            toast("whoops: " + e.getMessage());
                         }
                     }
+                }
+                if(found) {
+                    FriendsTab.friendAdapter.add(friendName);
+                    addFriendToDatabase(friendName, friendID);
+                    toast("Friend added successfully!");
+                    finish();
+                }
+                else{
+                    toast("User not found");
                 }
             }
 
@@ -84,6 +115,16 @@ public class AddFriendActivity extends AppCompatActivity {
             }
         };
         mRef.addListenerForSingleValueEvent(eventListener);
+
+    }
+
+    private void addFriendToDatabase(String friendName, String friendID) {
+
+        DatabaseReference mRef = FirebaseDatabase.getInstance()
+                .getReferenceFromUrl("https://notasana-57563.firebaseio.com/Users/Info/" +
+                        User.username + "/Friends/");
+
+        mRef.child(friendName).setValue(friendID);
 
     }
 
